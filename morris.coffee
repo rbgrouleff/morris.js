@@ -67,10 +67,7 @@ class Morris.Line
   #
   precalc: ->
     # sort data
-    if @options.sorted
-      # Apparently data is iterated through from end to start
-      @options.data.reverse()
-    else
+    if not @options.sorted
       @options.data.sort (a, b) => (a[@options.xkey] < b[@options.xkey]) - (b[@options.xkey] < a[@options.xkey])
     # extract labels
     @columnLabels = $.map @options.data, (d) => d[@options.xkey]

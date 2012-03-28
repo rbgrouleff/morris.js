@@ -63,9 +63,7 @@
     Line.prototype.precalc = function() {
       var d, series_data, touchHandler, ykey, ymax, ymin, _i, _j, _k, _len, _len2, _ref, _ref2, _ref3, _results,
         _this = this;
-      if (this.options.sorted) {
-        this.options.data.reverse();
-      } else {
+      if (!this.options.sorted) {
         this.options.data.sort(function(a, b) {
           return (a[_this.options.xkey] < b[_this.options.xkey]) - (b[_this.options.xkey] < a[_this.options.xkey]);
         });
