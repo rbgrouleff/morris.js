@@ -59,6 +59,7 @@ class Morris.Line
     smooth: true
     hideHover: false
     parseTime: true
+    sorted: false
     units: ''
     dateFormat: (x) -> new Date(x).toString()
 
@@ -66,7 +67,11 @@ class Morris.Line
   #
   precalc: ->
     # sort data
-    @options.data.sort (a, b) => (a[@options.xkey] < b[@options.xkey]) - (b[@options.xkey] < a[@options.xkey])
+    if @options.sorted
+      # Apparently data is iterated through from end to start
+      @options.data.reverse()
+    else
+      @options.data.sort (a, b) => (a[@options.xkey] < b[@options.xkey]) - (b[@options.xkey] < a[@options.xkey])
     # extract labels
     @columnLabels = $.map @options.data, (d) => d[@options.xkey]
     @seriesLabels = @options.labels
